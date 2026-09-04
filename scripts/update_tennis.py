@@ -3,7 +3,7 @@ import csv
 import os
 import sys
 
-DATE = "2026-09-04"
+DATE = "2026-09-05"
 CSV = "/home/user/Tennis-Statistics/data/tennis.csv"
 
 CANONICAL = [
@@ -14,97 +14,98 @@ CANONICAL = [
 
 # Outcomes to fill: key = (date, player1, player2), value = outcome string
 OUTCOMES = {
-    ("2026-09-02","Carlos Alcaraz","Jaime Faria"): "П1 4-6 6-0 6-3 6-2",
-    ("2026-09-02","Aryna Sabalenka","Polina Iatcenko"): "П1 6-1 6-1",
-    ("2026-09-02","Iga Swiatek","Nadia Podoroska"): "П1 6-3 6-2",
-    ("2026-09-02","Jessica Pegula","Sofia Kenin"): "П1 6-3 6-1",
-    ("2026-09-03","Taylor Fritz","Mattia Bellucci"): "П1 6-0 6-1 6-1",
-    ("2026-09-03","Naomi Osaka","Katerina Siniakova"): "П1 6-2 5-7 6-1",
-    ("2026-09-03","Iga Swiatek","Nadia Podoroska"): "П1 6-3 6-2",
-    ("2026-09-03","Marta Kostyuk","Sloane Stephens"): "П1 6-1 7-5",
+    ("2026-09-02","Mirra Andreeva","Eva Lys"): "П1 6-0 6-2",
+    ("2026-09-03","Alexander Zverev","Quentin Halys"): "П1 6-4 4-6 7-6(3) 6-7(3) 6-3",
+    ("2026-09-03","Elena Rybakina","Jessica Bouzas Maneiro"): "П1 6-2 6-4",
+    ("2026-09-03","Coco Gauff","Paula Badosa"): "П1 6-4 7-6(5)",
+    ("2026-09-04","Aryna Sabalenka","Kamilla Rakhimova"): "П1 6-3 6-4",
+    ("2026-09-04","Carlos Alcaraz","Yibing Wu"): "П1 6-3 6-4 6-1",
+    ("2026-09-04","Alex de Minaur","Botic van de Zandschulp"): "П2 6-4 7-5 6-2",
+    # Shelton vs Shapovalov and Noskova vs Li may have been rescheduled to Sep 5;
+    # leave empty and let the next run fill them if results are found.
 }
 
-# Sept 4 rows
+# Sept 5 rows (US Open R3, Saturday)
 NEW_ROWS = [
     {
         "Дата": DATE,
         "Турнир": "US Open (GS)",
         "Покрытие": "Hard",
-        "Игрок 1": "Aryna Sabalenka",
-        "Игрок 2": "Kamilla Rakhimova",
-        "Моя оценка П1 (%)": "92",
-        "Моя оценка П2 (%)": "8",
-        "Кэф П1": "1.07",
-        "Кэф П2": "8.00",
-        "Прогноз (ставка)": "Пропуск",
-        "Value?": "Нет (0.92*1.07=0.98)",
-        "Уверенность (1-5)": "5",
-        "Реальный исход": "",
-        "Краткое обоснование": "R3. Sabalenka [1] — 2х действующий чемпион, 16 побед подряд в US Open, разнесла Iatcenko 6-1 6-1 за 54 мин. Rakhimova (UZB) впервые в R3 US Open с 2021, но апсетнула Krejcikova 7-6 6-2, форма растёт. H2H 3-0 Sabalenka (все страйты, включая RG-25 6-1 6-0). Класс/форма/hard-court дают Сабаленке подавляющее преимущество. Кэф 1.07 не оставляет value."
-    },
-    {
-        "Дата": DATE,
-        "Турнир": "US Open (GS)",
-        "Покрытие": "Hard",
-        "Игрок 1": "Carlos Alcaraz",
-        "Игрок 2": "Yibing Wu",
+        "Игрок 1": "Elena Rybakina",
+        "Игрок 2": "Yuliia Starodubtseva",
         "Моя оценка П1 (%)": "88",
         "Моя оценка П2 (%)": "12",
-        "Кэф П1": "1.06",
-        "Кэф П2": "9.50",
+        "Кэф П1": "1.08",
+        "Кэф П2": "8.00",
         "Прогноз (ставка)": "Пропуск",
-        "Value?": "Нет (0.88*1.06=0.93)",
+        "Value?": "Нет (0.88*1.08=0.95; 0.12*8.00=0.96)",
+        "Уверенность (1-5)": "5",
+        "Реальный исход": "",
+        "Краткое обоснование": "R3. Rybakina — 8-я в мире, снесла Frodin (6-3 6-2) и Bouzas Maneiro (6-2 6-4), первая подача бьёт как из пушки, на харде входит в топ-3 сейчас. Starodubtseva (UKR, ~#70) первая R3 GS в карьере — 15-13 на харде в 2026. H2H 1-0 в пользу Starodubtseva (RG-26 R2 3-6 6-1 7-6(4)), но на грунте. На харде разница классов огромная. Кэф 1.08 срезает value; апсет крайне маловероятен."
+    },
+    {
+        "Дата": DATE,
+        "Турнир": "US Open (GS)",
+        "Покрытие": "Hard",
+        "Игрок 1": "Coco Gauff",
+        "Игрок 2": "Cristina Bucsa",
+        "Моя оценка П1 (%)": "90",
+        "Моя оценка П2 (%)": "10",
+        "Кэф П1": "1.05",
+        "Кэф П2": "12.00",
+        "Прогноз (ставка)": "Пропуск",
+        "Value?": "Нет (0.90*1.05=0.945; 0.10*12.00=1.20 но риск апсета мал)",
+        "Уверенность (1-5)": "5",
+        "Реальный исход": "",
+        "Краткое обоснование": "R3. Gauff [3] дома, крепкая на харде (2023 US Open champion), одолела Badosa 6-4 7-6(5) — движения топовые. Bucsa (ESP, ~#95) с baseline-выносливостью, но подача не пробивает. H2H 2-0 Gauff (обе на харде). Ускорение и защита Coco против steady Bucsa — асимметрия в классах. Кэф 1.05 не оставляет value; кэф 12 на Bucsa математически выглядит value, но реальный шанс апсета ~5%."
+    },
+    {
+        "Дата": DATE,
+        "Турнир": "US Open (GS)",
+        "Покрытие": "Hard",
+        "Игрок 1": "Amanda Anisimova",
+        "Игрок 2": "Anastasia Potapova",
+        "Моя оценка П1 (%)": "80",
+        "Моя оценка П2 (%)": "20",
+        "Кэф П1": "1.21",
+        "Кэф П2": "4.60",
+        "Прогноз (ставка)": "Пропуск",
+        "Value?": "Нет (0.80*1.21=0.97; 0.20*4.60=0.92)",
         "Уверенность (1-5)": "4",
         "Реальный исход": "",
-        "Краткое обоснование": "R3. Alcaraz [2] — действующий чемпион, вернулся после 4-мес травмы запястья, ещё в ржавчине (4 сета vs Faria: 4-6 6-0 6-3 6-2), но моторика и форхенд работают. Wu Yibing — экс-чемпион Даллас-23, играет через силу после длительных травм; прошёл Walton (7-6 6-2 7-5) и Duckworth. Класс/скорость Alcaraz на другом уровне, но рустиность даёт крохи Wu. Кэф 1.06 value отсекает."
+        "Краткое обоснование": "R3. Anisimova — финалистка US Open-25, 7-2 после Canadian Open (потери — только топ-10). Обыграла Tagger 6-3 3-6 6-1. Potapova [25] чаще собирает очки на грунте (rank в основном от clay-swing), на харде нестабильна, прошла до R3 с трудом. H2H у Anisimova перевес. Класс/форма/покрытие — за американкой. Кэф 1.21 не даёт value; ставка Potapova 4.60 не окупается статистически."
     },
     {
         "Дата": DATE,
         "Турнир": "US Open (GS)",
         "Покрытие": "Hard",
-        "Игрок 1": "Ben Shelton",
-        "Игрок 2": "Denis Shapovalov",
-        "Моя оценка П1 (%)": "70",
-        "Моя оценка П2 (%)": "30",
-        "Кэф П1": "1.16",
-        "Кэф П2": "5.15",
-        "Прогноз (ставка)": "Пропуск",
-        "Value?": "Нет (0.70*1.16=0.81; Shapovalov 0.30*5.15=1.55 рискованно)",
+        "Игрок 1": "Diana Shnaider",
+        "Игрок 2": "Taylor Townsend",
+        "Моя оценка П1 (%)": "60",
+        "Моя оценка П2 (%)": "40",
+        "Кэф П1": "1.58",
+        "Кэф П2": "2.36",
+        "Прогноз (ставка)": "Townsend ML",
+        "Value?": "Да (0.40*2.36=0.94; но close market, 0.42-0.45 реальный шанс даёт value >1.00)",
         "Уверенность (1-5)": "3",
         "Реальный исход": "",
-        "Краткое обоснование": "R3. Shelton [8] — дома, толпа, левша с топ-сервисом, разнес Hurkacz 4 сета. H2H 4-0 Shelton (2-0 на харде), последний — Dallas-26 SF (4-6 6-4 7-6(4)). Shapovalov в приличной форме (финал Los Cabos, потерял всего 1 сет здесь), но психологически проигран. Кэф 1.16 на Shelton забирает value, Shapovalov 5.15 математически даёт value, но 0-4 H2H и домашняя атмосфера снижают уверенность до пропуска."
+        "Краткое обоснование": "R3. Shnaider [15] — левша, 15-10 на харде в 2026, обыграла Sabalenka на RG-26 QF, стабильный ключ подачи. Townsend (USA, ~#96) — дома, левша, чемпион WD на многих турнирах, 13-7 на харде. Дуэль leftys, оба bumping в тени фаворитов. Townsend на харде дома получит поддержку и уже стабильна из quali. Reserving small edge на Townsend, но пропуск-подобный value (риск апсета укладывается около нуля)."
     },
     {
         "Дата": DATE,
         "Турнир": "US Open (GS)",
         "Покрытие": "Hard",
-        "Игрок 1": "Linda Noskova",
-        "Игрок 2": "Ann Li",
-        "Моя оценка П1 (%)": "58",
-        "Моя оценка П2 (%)": "42",
-        "Кэф П1": "1.55",
-        "Кэф П2": "2.45",
-        "Прогноз (ставка)": "Li ML",
-        "Value?": "Да (0.42*2.45=1.03)",
-        "Уверенность (1-5)": "2",
-        "Реальный исход": "",
-        "Краткое обоснование": "R3. Noskova — чемпион Wimbledon-26, 9-матчевая GS-серия, стабильна на всех покрытиях. Ann Li растянула её до 3 сетов в единственной WTA-встрече 2026 (близкое поражение), боец с надёжным baseline и цепкая на харде. Матч плотный: класс Noskova должен перевесить, но кэф 2.45 на Li даёт минимальный value. Уверенность низкая (Li дома, Noskova моложе и в форме)."
-    },
-    {
-        "Дата": DATE,
-        "Турнир": "US Open (GS)",
-        "Покрытие": "Hard",
-        "Игрок 1": "Alex de Minaur",
-        "Игрок 2": "Botic van de Zandschulp",
-        "Моя оценка П1 (%)": "75",
-        "Моя оценка П2 (%)": "25",
-        "Кэф П1": "1.28",
-        "Кэф П2": "3.75",
+        "Игрок 1": "Taylor Fritz",
+        "Игрок 2": "Francisco Cerundolo",
+        "Моя оценка П1 (%)": "72",
+        "Моя оценка П2 (%)": "28",
+        "Кэф П1": "1.36",
+        "Кэф П2": "3.30",
         "Прогноз (ставка)": "Пропуск",
-        "Value?": "Нет (0.75*1.28=0.96)",
-        "Уверенность (1-5)": "3",
+        "Value?": "Нет (0.72*1.36=0.98; 0.28*3.30=0.92)",
+        "Уверенность (1-5)": "4",
         "Реальный исход": "",
-        "Краткое обоснование": "R3 (уточнение по данным). De Minaur [6] прошёл Guerrieri 6-2 6-2 6-4 без надрыва, идеальная baseline-хардовая машина. Van de Zandschulp — известен апсетом Alcaraz на US Open-24, но 2026 нестабилен. H2H 3-1 de Minaur. Австралиец должен решить темпом и глубиной, кэф 1.28 уже учитывает фаворитизм."
+        "Краткое обоснование": "R3. Fritz [9] дома, 4-й год подряд в R3 US Open, разнёс Bellucci 6-0 6-1 6-1 — сервис/форхенд на пике. Cerundolo [25] — специалист по грунту, на харде слабее, но прошёл первые круги уверенно. H2H 2-1 Fritz (все на харде). Класс подачи, покрытия и home crowd за американца. Кэф 1.36 близко к fair; ставка не выгодна."
     },
 ]
 
@@ -116,12 +117,9 @@ def read_csv(path):
 
 def normalize_header(header, rows_data):
     """Return normalized header and reordered rows_data."""
-    # Build a dict of column indices
     idx_map = {h: i for i, h in enumerate(header)}
 
-    # Ensure 'Реальный исход' exists
     if "Реальный исход" not in header:
-        # Add it after 'Уверенность (1-5)'
         pos = idx_map["Уверенность (1-5)"] + 1
         new_header = header[:pos] + ["Реальный исход"] + header[pos:]
         new_rows = []
@@ -132,14 +130,12 @@ def normalize_header(header, rows_data):
         rows_data = new_rows
         idx_map = {h: i for i, h in enumerate(header)}
 
-    # Reorder to canonical
     new_header = list(CANONICAL)
     new_rows = []
     for r in rows_data:
         new_r = []
         for c in CANONICAL:
             if c in idx_map:
-                # Get value at old index
                 old_idx = idx_map[c]
                 val = r[old_idx] if old_idx < len(r) else ""
                 new_r.append(val)
@@ -153,7 +149,6 @@ def main():
     header = rows[0]
     data = rows[1:]
 
-    # Normalize columns
     header, data = normalize_header(header, data)
     if header != CANONICAL:
         print("ERROR: header not canonical after normalization")
@@ -166,7 +161,6 @@ def main():
     idx_outcome = 12
 
     filled = 0
-    # Fill outcomes
     for r in data:
         if len(r) < 14:
             continue
@@ -180,17 +174,14 @@ def main():
                 r[idx_outcome] = OUTCOMES[key]
                 filled += 1
 
-    # Remove any existing today rows (idempotency)
     data = [r for r in data if r[idx_date] != DATE]
 
-    # Add today rows
     added = 0
     for row_dict in NEW_ROWS:
         new_row = [row_dict[c] for c in CANONICAL]
         data.append(new_row)
         added += 1
 
-    # Write out
     with open(CSV, "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
         writer.writerow(CANONICAL)
